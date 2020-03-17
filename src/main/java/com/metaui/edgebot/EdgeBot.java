@@ -22,7 +22,7 @@ public class EdgeBot {
         Logger.getLogger("com.metaui").setLevel(Level.FINEST);
 
         AppConfig config = new AppConfig();
-        config.setSingleTeamBotToken("xoxb-1002667100565-1005402728624-5epeNEB18zu9k1Py3jApvQlL");
+        config.setSingleTeamBotToken("xoxb-1002667100565-1005402728624-PnbU6wzGMY1YgcxNQGktOvXD");
         config.setSigningSecret("f0ffc785b30f02e795694f7ceef827b9");
         App app = new App(config);
 
