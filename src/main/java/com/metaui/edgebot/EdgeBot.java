@@ -15,10 +15,11 @@ import java.util.logging.Logger;
 public class EdgeBot {
     public static void main(String[] args) throws Exception {
         // App expects env variables (SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET)
+        System.setProperty("org.eclipse.jetty.LEVEL","DEBUG");
 
         Handler fh = new FileHandler("/tmp/edgebot.log");
         Logger.getLogger("").addHandler(fh);
-        Logger.getLogger("com.wombat").setLevel(Level.FINEST);
+        Logger.getLogger("com.metaui").setLevel(Level.FINEST);
 
         AppConfig config = new AppConfig();
         config.setSingleTeamBotToken("xoxb-1002667100565-1005402728624-zCLqgHbIyiyNgZSP9Vl0PHiS");
