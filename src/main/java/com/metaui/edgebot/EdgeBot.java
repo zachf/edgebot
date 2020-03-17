@@ -27,6 +27,7 @@ public class EdgeBot {
         App app = new App(config);
 
         app.command("/bot", (req, ctx) -> {
+            System.out.println(req);
             return ctx.ack(":wave: Hello!");
         });
 
