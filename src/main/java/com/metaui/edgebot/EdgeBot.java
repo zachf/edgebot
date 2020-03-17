@@ -7,9 +7,19 @@ import com.slack.api.bolt.App;
 import com.slack.api.bolt.AppConfig;
 import com.slack.api.bolt.jetty.SlackAppServer;
 
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class EdgeBot {
     public static void main(String[] args) throws Exception {
         // App expects env variables (SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET)
+
+        Handler fh = new FileHandler("/tmp/edgebot.log");
+        Logger.getLogger("").addHandler(fh);
+        Logger.getLogger("com.wombat").setLevel(Level.FINEST);
+
         AppConfig config = new AppConfig();
         config.setSingleTeamBotToken("xoxb-1002667100565-1005402728624-zCLqgHbIyiyNgZSP9Vl0PHiS");
         config.setSigningSecret("f0ffc785b30f02e795694f7ceef827b9");
