@@ -36,7 +36,7 @@ dependencies {
 
 application {
     // Define the main class for the application
-    mainClassName = "com.metaui.edgebot.App"
+    mainClassName = "com.metaui.edgebot.EdgeBot"
 }
 
 //run {
