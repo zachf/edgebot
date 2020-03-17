@@ -11,7 +11,7 @@ public class EdgeBot {
     public static void main(String[] args) throws Exception {
         // App expects env variables (SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET)
         AppConfig config = new AppConfig();
-        config.setSingleTeamBotToken("xoxb-1002667100565-1005402728624-U7wjn2Tffx41leQ9VB6agEIB");
+        config.setSingleTeamBotToken("xoxb-1002667100565-1005402728624-zCLqgHbIyiyNgZSP9Vl0PHiS");
         config.setSigningSecret("f0ffc785b30f02e795694f7ceef827b9");
         App app = new App(config);
 
