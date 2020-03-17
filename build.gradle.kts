@@ -23,6 +23,12 @@ repositories {
 dependencies {
     // This dependency is used by the application.
     implementation("com.google.guava:guava:27.1-jre")
+    implementation("com.google.auto.value:auto-value-annotations:1.7")
+
+    implementation("com.slack.api:bolt:1.0.0-RC3")
+    implementation("com.slack.api:bolt-servlet:1.0.0-RC3")
+    implementation("com.slack.api:bolt-jetty:1.0.0-RC3")
+    implementation("org.slf4j:slf4j-simple:1.7.30")
 
     // Use JUnit test framework
     testImplementation("junit:junit:4.12")
@@ -32,3 +38,7 @@ application {
     // Define the main class for the application
     mainClassName = "com.metaui.edgebot.App"
 }
+
+//run {
+//    systemProperty "org.slf4j.simpleLogger.log.com.slack.api", System.getProperty("slackLogLevel")
+//}
