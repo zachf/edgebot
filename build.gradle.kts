@@ -37,6 +37,7 @@ dependencies {
 application {
     // Define the main class for the application
     mainClassName = "com.metaui.edgebot.EdgeBot"
+    applicationDefaultJvmArgs = listOf("-Dorg.eclipse.jetty.LEVEL=DEBUG")
 }
 
 //run {
