@@ -5,6 +5,7 @@ package com.metaui.edgebot;
 
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.AppConfig;
+import com.slack.api.bolt.handler.builtin.SlashCommandHandler;
 import com.slack.api.bolt.jetty.SlackAppServer;
 
 import java.util.logging.FileHandler;
@@ -34,10 +35,12 @@ public class EdgeBot {
         config.setSigningSecret(signingSecret);
         App app = new App(config);
 
-        app.command("/bot", (req, ctx) -> {
+        final SlackBotCommandImpl botCommand = new SlackBotCommandImpl();
+        SlashCommandHandler slashCommandHandler = (req, ctx) -> {
             System.out.println(req);
-            return ctx.ack(":wave: Hello " + req.getPayload().getUserName() + ": " + req.getPayload().getText());
-        });
+            return ctx.ack(botCommand.execute(req.getPayload().getUserName(), req.getPayload().getText()));
+        };
+        app.command(SlackBotCommandImpl.PREFIX, slashCommandHandler);
 
         SlackAppServer server = new SlackAppServer(app);
         server.start(); // http://localhost:3000/slack/events
