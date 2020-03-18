@@ -36,7 +36,7 @@ public class EdgeBot {
 
         app.command("/bot", (req, ctx) -> {
             System.out.println(req);
-            return ctx.ack(":wave: Hello!");
+            return ctx.ack(":wave: Hello" + req.getPayload().getUserId());
         });
 
         SlackAppServer server = new SlackAppServer(app);
