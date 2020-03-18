@@ -35,9 +35,16 @@ dependencies {
 }
 
 application {
+    val SLACK_BOT_TOKEN: String by project
+    val SLACK_SIGNING_SECRET: String by project
+
     // Define the main class for the application
     mainClassName = "com.metaui.edgebot.EdgeBot"
-    applicationDefaultJvmArgs = listOf("-Dorg.eclipse.jetty.LEVEL=DEBUG")
+    applicationDefaultJvmArgs = listOf(
+            "-Dorg.eclipse.jetty.LEVEL=DEBUG",
+            "-DSLACK_BOT_TOKEN=$SLACK_BOT_TOKEN",
+            "-DSLACK_SIGNING_SECRET=$SLACK_SIGNING_SECRET"
+    )
 }
 
 //run {
