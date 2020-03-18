@@ -17,13 +17,21 @@ public class EdgeBot {
         // App expects env variables (SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET)
         System.setProperty("org.eclipse.jetty.LEVEL","DEBUG");
 
+        String botToken = System.getProperty("SLACK_BOT_TOKEN");
+        String signingSecret = System.getProperty("SLACK_SIGNING_SECRET");
+
+        if (botToken == null || signingSecret == null) {
+            System.err.println("Missing token or secret");
+            System.exit(1);
+        }
+
         Handler fh = new FileHandler("/tmp/edgebot.log");
         Logger.getLogger("").addHandler(fh);
         Logger.getLogger("com.metaui").setLevel(Level.FINEST);
 
         AppConfig config = new AppConfig();
-        config.setSingleTeamBotToken("xoxb-1002667100565-1005402728624-9mnOxMsuja3Cg3m9s7uNz4nL");
-        config.setSigningSecret("f0ffc785b30f02e795694f7ceef827b9");
+        config.setSingleTeamBotToken(botToken);
+        config.setSigningSecret(signingSecret);
         App app = new App(config);
 
         app.command("/bot", (req, ctx) -> {
