@@ -1,6 +1,7 @@
 package com.metaui.edgebot;
 
 import com.metaui.edgebot.subcommands.GetPropertyCommandImpl;
+import com.metaui.edgebot.subcommands.ListPropertiesCommandImpl;
 
 public class SlackBotCommandImpl implements SlackCommandInterface {
     public static String PREFIX = "/bot";
@@ -22,6 +23,8 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
             switch (split[0]) {
                 case GetPropertyCommandImpl.PREFIX:
                     return new GetPropertyCommandImpl().execute(userName, subCommandText.toString());
+                case ListPropertiesCommandImpl.PREFIX:
+                    return new ListPropertiesCommandImpl().execute(userName, subCommandText.toString());
                 default:
                     return "Command not recognized, \"/bot help\" for help";
             }
