@@ -36,7 +36,7 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
 
             for (SlackCommandInterface commandInterface : commands) {
                 if (commandInterface.getPrefix().equals(split[0])) {
-                    commandInterface.execute(subCommandContext);
+                    return commandInterface.execute(subCommandContext);
                 }
             }
         }
