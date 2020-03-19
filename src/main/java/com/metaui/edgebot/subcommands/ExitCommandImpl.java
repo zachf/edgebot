@@ -3,11 +3,12 @@ package com.metaui.edgebot.subcommands;
 import com.metaui.edgebot.BotCommandContext;
 import com.metaui.edgebot.SlackCommandInterface;
 
-public class GetPropertyCommandImpl implements SlackCommandInterface {
-    public static final String PREFIX = "getprop";
+public class ExitCommandImpl implements SlackCommandInterface {
+    public static final String PREFIX = "exit";
 
     @Override
     public String execute(BotCommandContext context) {
-        return System.getProperty(context.getSubCommandText());
+        System.exit(0);
+        return "Bot is exiting";
     }
 }
