@@ -11,10 +11,10 @@ public class ExitCommandImpl implements SlackCommandInterface {
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
+                System.exit(0);
             } catch (InterruptedException e) {
                 //ignore
             }
-            System.exit(0);
         }).start();
         return "Bot is exiting";
     }
