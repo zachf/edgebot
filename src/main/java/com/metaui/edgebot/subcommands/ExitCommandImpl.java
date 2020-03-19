@@ -18,4 +18,9 @@ public class ExitCommandImpl implements SlackCommandInterface {
         }).start();
         return "Bot is exiting";
     }
+
+    @Override
+    public String getPrefix() {
+        return PREFIX;
+    }
 }

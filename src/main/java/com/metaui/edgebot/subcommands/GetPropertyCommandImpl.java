@@ -10,4 +10,10 @@ public class GetPropertyCommandImpl implements SlackCommandInterface {
     public String execute(BotCommandContext context) {
         return System.getProperty(context.getSubCommandText());
     }
+
+    @Override
+    public String getPrefix() {
+        return PREFIX;
+    }
+
 }

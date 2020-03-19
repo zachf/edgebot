@@ -4,8 +4,19 @@ import com.metaui.edgebot.subcommands.ExitCommandImpl;
 import com.metaui.edgebot.subcommands.GetPropertyCommandImpl;
 import com.metaui.edgebot.subcommands.ListPropertiesCommandImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SlackBotCommandImpl implements SlackCommandInterface {
     public static String PREFIX = "/bot";
+
+    private List<SlackCommandInterface> commands = new ArrayList<>();
+
+    public SlackBotCommandImpl() {
+        commands.add(new ExitCommandImpl());
+        commands.add(new GetPropertyCommandImpl());
+        commands.add(new ListPropertiesCommandImpl());
+    }
 
     @Override
     public String execute(BotCommandContext commandContext) {
@@ -23,16 +34,18 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
 
             BotCommandContext subCommandContext = new BotCommandContext(commandContext.getUserName(), subCommandText.toString());
 
-            switch (split[0]) {
-                case GetPropertyCommandImpl.PREFIX:
-                    return new GetPropertyCommandImpl().execute(subCommandContext);
-                case ListPropertiesCommandImpl.PREFIX:
-                    return new ListPropertiesCommandImpl().execute(subCommandContext);
-                case ExitCommandImpl.PREFIX:
-                    return new ExitCommandImpl().execute(subCommandContext);
+            for (SlackCommandInterface commandInterface : commands) {
+                if (commandInterface.getPrefix().equals(split[0])) {
+                    commandInterface.execute(subCommandContext);
+                }
             }
         }
 
         return "Command not recognized, \"/bot help\" for help";
+    }
+
+    @Override
+    public String getPrefix() {
+        return "/bot";
     }
 }

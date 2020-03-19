@@ -16,4 +16,10 @@ public class ListPropertiesCommandImpl implements SlackCommandInterface {
         }
         return out.toString();
     }
+
+    @Override
+    public String getPrefix() {
+        return PREFIX;
+    }
+
 }
