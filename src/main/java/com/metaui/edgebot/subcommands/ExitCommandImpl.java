@@ -8,7 +8,17 @@ public class ExitCommandImpl implements SlackCommandInterface {
 
     @Override
     public String execute(BotCommandContext context) {
-        System.exit(0);
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    //ignore
+                }
+                System.exit(0);
+            }
+        }.start();
         return "Bot is exiting";
     }
 }
