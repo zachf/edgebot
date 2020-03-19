@@ -12,7 +12,7 @@ public class ListPropertiesCommandImpl implements SlackCommandInterface {
     public String execute(BotCommandContext context) {
         StringBuilder out = new StringBuilder();
         for (String propName : System.getProperties().stringPropertyNames()) {
-            out.append(propName).append(" ");
+            out.append(propName).append('\n');
         }
         return out.toString();
     }
