@@ -35,7 +35,7 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
             BotCommandContext subCommandContext = new BotCommandContext(commandContext.getUserName(), subCommandText.toString());
 
             for (SlackCommandInterface commandInterface : commands) {
-                if (commandInterface.getPrefix().equals(split[1])) {
+                if (commandInterface.getPrefix().equals(split[0])) {
                     commandInterface.execute(subCommandContext);
                 }
             }
