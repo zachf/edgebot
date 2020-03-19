@@ -2,18 +2,18 @@ package com.metaui.edgebot;
 
 public class BotCommandContext {
     private String userName;
-    private String subCommandText;
+    private String[] commandTokens;
 
-    public BotCommandContext(String userName, String subCommandText) {
+    public BotCommandContext(String userName, String[] commandTokens) {
         this.userName = userName;
-        this.subCommandText = subCommandText;
+        this.commandTokens = commandTokens;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public String getSubCommandText() {
-        return subCommandText;
+    public String[] getCommandTokens() {
+        return commandTokens;
     }
 }

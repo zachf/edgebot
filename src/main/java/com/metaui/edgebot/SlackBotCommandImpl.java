@@ -5,6 +5,7 @@ import com.metaui.edgebot.subcommands.GetPropertyCommandImpl;
 import com.metaui.edgebot.subcommands.ListPropertiesCommandImpl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SlackBotCommandImpl implements SlackCommandInterface {
@@ -20,23 +21,13 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
 
     @Override
     public String execute(BotCommandContext commandContext) {
-        String[] split = commandContext.getSubCommandText().split(" ");
+        if (commandContext.getCommandTokens().length > 0) {
+            BotCommandContext subCommandContext = new BotCommandContext(commandContext.getUserName(),
+                    Arrays.copyOfRange(commandContext.getCommandTokens(), 1, commandContext.getCommandTokens().length));
 
-        if (split.length > 0) {
-            StringBuilder subCommandText = new StringBuilder();
-
-            for (int i = 1; i < split.length; i++) {
-                if (i > 1) {
-                    subCommandText.append(' ');
-                }
-                subCommandText.append(split[i]);
-            }
-
-            BotCommandContext subCommandContext = new BotCommandContext(commandContext.getUserName(), subCommandText.toString());
-
-            for (SlackCommandInterface commandInterface : commands) {
-                if (commandInterface.getPrefix().equals(split[0])) {
-                    return commandInterface.execute(subCommandContext);
+            for (SlackCommandInterface command : commands) {
+                if (command.getPrefix().equals(commandContext.getCommandTokens()[0])) {
+                    return command.execute(subCommandContext);
                 }
             }
         }
