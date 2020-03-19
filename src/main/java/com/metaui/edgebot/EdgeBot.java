@@ -38,7 +38,8 @@ public class EdgeBot {
         final SlackBotCommandImpl botCommand = new SlackBotCommandImpl();
         SlashCommandHandler slashCommandHandler = (req, ctx) -> {
             System.out.println(req);
-            return ctx.ack(botCommand.execute(req.getPayload().getUserName(), req.getPayload().getText()));
+            return ctx.ack(botCommand.execute(new BotCommandContext(req.getPayload().getUserName(),
+                    req.getPayload().getText())));
         };
         app.command(SlackBotCommandImpl.PREFIX, slashCommandHandler);
 

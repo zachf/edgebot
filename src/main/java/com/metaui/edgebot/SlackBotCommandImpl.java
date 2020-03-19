@@ -8,8 +8,8 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
     public static String PREFIX = "/bot";
 
     @Override
-    public String execute(String userName, String text) {
-        String[] split = text.split(" ");
+    public String execute(BotCommandContext commandContext) {
+        String[] split = commandContext.getSubCommandText().split(" ");
 
         if (split.length > 0) {
             StringBuilder subCommandText = new StringBuilder();
@@ -21,20 +21,18 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
                 subCommandText.append(split[i]);
             }
 
-            BotCommandContext context = new BotCommandContext(userName, subCommandText);
+            BotCommandContext subCommandContext = new BotCommandContext(commandContext.getUserName(), subCommandText.toString());
 
             switch (split[0]) {
                 case GetPropertyCommandImpl.PREFIX:
-                    return new GetPropertyCommandImpl().execute(userName, subCommandText.toString());
+                    return new GetPropertyCommandImpl().execute(subCommandContext);
                 case ListPropertiesCommandImpl.PREFIX:
-                    return new ListPropertiesCommandImpl().execute(userName, subCommandText.toString());
+                    return new ListPropertiesCommandImpl().execute(subCommandContext);
                 case ExitCommandImpl.PREFIX:
-                    return new ExitCommandImpl().execute(userName, subCommandText.toString());
-                default:
-                    return "Command not recognized, \"/bot help\" for help";
+                    return new ExitCommandImpl().execute(subCommandContext);
             }
         }
 
-        return ":wave: Hello " + userName + ", your command was: " + text;
+        return "Command not recognized, \"/bot help\" for help";
     }
 }
