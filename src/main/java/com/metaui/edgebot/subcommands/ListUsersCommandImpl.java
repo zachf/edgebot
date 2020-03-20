@@ -7,7 +7,7 @@ import com.metaui.edgebot.SlackEngine;
 import com.slack.api.model.User;
 
 public class ListUsersCommandImpl implements SlackCommandInterface {
-    public static final String PREFIX = "listchannels";
+    public static final String PREFIX = "listusers";
     private SlackEngine engine;
 
     public ListUsersCommandImpl(SlackEngine engine) {
