@@ -7,7 +7,7 @@ public interface SlackCommandInterface {
     String execute(BotCommandContext context);
     String getPrefix();
 
-    static SlackCommandInterface getInstance(Slack slack, SlackEngine engine, String token, Conversation homeChannel) {
+    static SlackCommandInterface newInstance(Slack slack, SlackEngine engine, String token, Conversation homeChannel) {
         return new SlackBotCommandImpl(slack, engine, token, homeChannel);
     }
 }
