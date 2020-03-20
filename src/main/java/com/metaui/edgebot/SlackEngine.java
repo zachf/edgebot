@@ -80,9 +80,12 @@ public class SlackEngine implements Runnable {
         while (keepGoing) {
             uReq.setCursor(nextCursor);
             UsersListResponse uResp = slack.methods().usersList(uReq);
+            System.out.println(uResp);
 
-            System.out.println("Adding " + uResp.getMembers().size() + " users");
-            allUsers.addAll(uResp.getMembers());
+            if (uResp.getMembers() != null) {
+                System.out.println("Adding " + uResp.getMembers().size() + " users");
+                allUsers.addAll(uResp.getMembers());
+            }
 
             nextCursor = uResp.getResponseMetadata() == null ? null : uResp.getResponseMetadata().getNextCursor();
             if (nextCursor == null || nextCursor.isEmpty()) keepGoing = false;
