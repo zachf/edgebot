@@ -1,17 +1,17 @@
 package com.metaui.edgebot.subcommands;
 
 import com.metaui.edgebot.BotCommandContext;
+import com.metaui.edgebot.SlackBotContext;
 import com.metaui.edgebot.SlackCommandInterface;
-import com.metaui.edgebot.SlackEngine;
 
 import com.slack.api.model.User;
 
 public class ListUsersCommandImpl implements SlackCommandInterface {
     public static final String PREFIX = "listusers";
-    private SlackEngine engine;
+    private final SlackBotContext botContext;
 
-    public ListUsersCommandImpl(SlackEngine engine) {
-        this.engine = engine;
+    public ListUsersCommandImpl(SlackBotContext botContext) {
+        this.botContext = botContext;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ListUsersCommandImpl implements SlackCommandInterface {
         StringBuilder out = new StringBuilder();
 
         try {
-            for (User user : engine.getUsers()) {
+            for (User user : botContext.getEngine().getUsers()) {
                 if (user != null) {
                     out.append(user.getId()).append(": ").append(user.getName()).append('\n');
                 }

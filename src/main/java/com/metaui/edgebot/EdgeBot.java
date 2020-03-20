@@ -49,6 +49,8 @@ public class EdgeBot {
         Slack slack = Slack.getInstance(client);
         SlackEngine engine = new SlackEngine(slack, botToken);
 
+        Conversation homeChannel = null;
+
         for (Conversation conversation : engine.getChannels()) {
             if (conversation != null) {
                 System.out.println(conversation.getId() + ": " + conversation.getName());
@@ -60,11 +62,13 @@ public class EdgeBot {
 
                     slack.methods().chatPostMessage(ChatPostMessageRequest.builder().token(botToken).
                             channel(conversation.getId()).text("Hello from the bot, the time is " + new Date()).build());
+
+                    homeChannel = conversation;
                 }
             }
         }
 
-        final SlackBotCommandImpl botCommand = new SlackBotCommandImpl(engine);
+        final SlackBotCommandImpl botCommand = new SlackBotCommandImpl(slack, engine, botToken, homeChannel);
         app.command(SlackBotCommandImpl.PREFIX, (req, ctx) -> {
             System.out.println(req);
             return ctx.ack(botCommand.execute(new BotCommandContext(req.getPayload().getUserName(),

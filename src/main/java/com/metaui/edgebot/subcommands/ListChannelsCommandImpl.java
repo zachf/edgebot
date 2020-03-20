@@ -1,16 +1,17 @@
 package com.metaui.edgebot.subcommands;
 
 import com.metaui.edgebot.BotCommandContext;
+import com.metaui.edgebot.SlackBotContext;
 import com.metaui.edgebot.SlackCommandInterface;
 import com.metaui.edgebot.SlackEngine;
 import com.slack.api.model.Conversation;
 
 public class ListChannelsCommandImpl implements SlackCommandInterface {
     public static final String PREFIX = "listchannels";
-    private SlackEngine engine;
+    private SlackBotContext botContext;
 
-    public ListChannelsCommandImpl(SlackEngine engine) {
-        this.engine = engine;
+    public ListChannelsCommandImpl(SlackBotContext botContext) {
+        this.botContext = botContext;
     }
 
     @Override
@@ -18,7 +19,7 @@ public class ListChannelsCommandImpl implements SlackCommandInterface {
         StringBuilder out = new StringBuilder();
 
         try {
-            for (Conversation conversation : engine.getChannels()) {
+            for (Conversation conversation : botContext.getEngine().getChannels()) {
                 if (conversation != null) {
                     out.append(conversation.getId()).append(": ").append(conversation.getName()).append('\n');
                 }

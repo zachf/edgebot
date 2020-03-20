@@ -1,6 +1,8 @@
 package com.metaui.edgebot;
 
 import com.metaui.edgebot.subcommands.*;
+import com.slack.api.Slack;
+import com.slack.api.model.Conversation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,12 +13,14 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
 
     private List<SlackCommandInterface> commands = new ArrayList<>();
 
-    public SlackBotCommandImpl(SlackEngine engine) {
-        commands.add(new ExitCommandImpl(engine));
-        commands.add(new GetPropertyCommandImpl(engine));
-        commands.add(new ListPropertiesCommandImpl(engine));
-        commands.add(new ListChannelsCommandImpl(engine));
-        commands.add(new ListUsersCommandImpl(engine));
+    public SlackBotCommandImpl(Slack slack, SlackEngine engine, String token, Conversation homeChannel) {
+        SlackBotContext context = new SlackBotContext(slack, engine, token, homeChannel);
+
+        commands.add(new ExitCommandImpl(context));
+        commands.add(new GetPropertyCommandImpl(context));
+        commands.add(new ListPropertiesCommandImpl(context));
+        commands.add(new ListChannelsCommandImpl(context));
+        commands.add(new ListUsersCommandImpl(context));
     }
 
     @Override
