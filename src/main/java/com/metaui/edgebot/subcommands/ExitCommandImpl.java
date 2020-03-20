@@ -26,11 +26,7 @@ public class ExitCommandImpl implements SlackCommandInterface {
 
                 Thread.sleep(1000);
                 System.exit(0);
-            } catch (InterruptedException e) {
-                //ignore
-            } catch (SlackApiException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (InterruptedException | SlackApiException | IOException e) {
                 e.printStackTrace();
             }
         }).start();

@@ -69,8 +69,8 @@ public class EdgeBot {
             }
         }
 
-        final SlackBotCommandImpl botCommand = new SlackBotCommandImpl(slack, engine, botToken, homeChannel);
-        app.command(SlackBotCommandImpl.PREFIX, (req, ctx) -> {
+        final SlackCommandInterface botCommand = SlackCommandInterface.getInstance(slack, engine, botToken, homeChannel);
+        app.command(botCommand.getPrefix(), (req, ctx) -> {
             System.out.println(req);
             return ctx.ack(botCommand.execute(new BotCommandContext(req.getPayload().getUserName(),
                     req.getPayload().getText().split(" "))));

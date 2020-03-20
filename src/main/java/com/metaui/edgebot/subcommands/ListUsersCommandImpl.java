@@ -3,7 +3,6 @@ package com.metaui.edgebot.subcommands;
 import com.metaui.edgebot.BotCommandContext;
 import com.metaui.edgebot.SlackBotContext;
 import com.metaui.edgebot.SlackCommandInterface;
-
 import com.slack.api.model.User;
 
 public class ListUsersCommandImpl implements SlackCommandInterface {

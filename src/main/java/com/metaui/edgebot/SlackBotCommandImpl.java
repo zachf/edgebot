@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SlackBotCommandImpl implements SlackCommandInterface {
+class SlackBotCommandImpl implements SlackCommandInterface {
     public static String PREFIX = "/bot";
 
     private List<SlackCommandInterface> commands = new ArrayList<>();
@@ -48,6 +48,6 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
 
     @Override
     public String getPrefix() {
-        return "/bot";
+        return PREFIX;
     }
 }
