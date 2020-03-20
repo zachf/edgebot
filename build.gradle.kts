@@ -25,9 +25,10 @@ dependencies {
     implementation("com.google.guava:guava:27.1-jre")
     implementation("com.google.auto.value:auto-value-annotations:1.7")
 
-    implementation("com.slack.api:bolt:1.0.0-RC3")
-    implementation("com.slack.api:bolt-servlet:1.0.0-RC3")
-    implementation("com.slack.api:bolt-jetty:1.0.0-RC3")
+    implementation("com.slack.api:bolt:1.0.1")
+    implementation("com.slack.api:bolt-servlet:1.0.1")
+    implementation("com.slack.api:bolt-jetty:1.0.1")
+    implementation("com.slack.api:slack-api-client:1.0.1")
     implementation("org.slf4j:slf4j-simple:1.7.30")
 
     // Use JUnit test framework

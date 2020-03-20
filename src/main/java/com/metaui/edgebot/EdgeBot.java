@@ -6,7 +6,12 @@ package com.metaui.edgebot;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.AppConfig;
 import com.slack.api.bolt.jetty.SlackAppServer;
+import com.slack.api.methods.request.conversations.ConversationsListRequest;
+import com.slack.api.scim.impl.SCIMClientImpl;
+import com.slack.api.util.http.SlackHttpClient;
+import okhttp3.Response;
 
+import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -40,6 +45,12 @@ public class EdgeBot {
             return ctx.ack(botCommand.execute(new BotCommandContext(req.getPayload().getUserName(),
                     req.getPayload().getText().split(" "))));
         });
+
+        SlackHttpClient client = new SlackHttpClient();
+        Response response = client.postJsonBody("", ConversationsListRequest.builder().token("token").cursor("test")
+                .excludeArchived(true).build().toString());
+
+        System.out.println(response);
 
         SlackAppServer server = new SlackAppServer(app);
         server.start(); // http://localhost:3000/slack/events
