@@ -36,11 +36,11 @@ public class EdgeBot {
         App app = new App(config);
 
         SlackEngine engine = new SlackEngine("", "edgebot-test");
-        engine.getChannels();
-
-        for (Conversation conversation : engine.getChannels()) {
-            System.out.println(conversation.getId() + ": " + conversation.getName());
-        }
+//        engine.getChannels();
+//
+//        for (Conversation conversation : engine.getChannels()) {
+//            System.out.println(conversation.getId() + ": " + conversation.getName());
+//        }
 
         final SlackBotCommandImpl botCommand = new SlackBotCommandImpl(engine);
         app.command(SlackBotCommandImpl.PREFIX, (req, ctx) -> {
