@@ -6,12 +6,8 @@ package com.metaui.edgebot;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.AppConfig;
 import com.slack.api.bolt.jetty.SlackAppServer;
-import com.slack.api.methods.request.conversations.ConversationsListRequest;
-import com.slack.api.scim.impl.SCIMClientImpl;
-import com.slack.api.util.http.SlackHttpClient;
-import okhttp3.Response;
+import com.slack.api.model.Conversation;
 
-import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -39,18 +35,26 @@ public class EdgeBot {
         config.setSigningSecret(signingSecret);
         App app = new App(config);
 
-        final SlackBotCommandImpl botCommand = new SlackBotCommandImpl();
+        SlackEngine engine = new SlackEngine("", "edgebot-test");
+        engine.getChannels();
+
+        for (Conversation conversation : engine.getChannels()) {
+            System.out.println(conversation.getId() + ": " + conversation.getName());
+        }
+
+        final SlackBotCommandImpl botCommand = new SlackBotCommandImpl(engine);
         app.command(SlackBotCommandImpl.PREFIX, (req, ctx) -> {
             System.out.println(req);
             return ctx.ack(botCommand.execute(new BotCommandContext(req.getPayload().getUserName(),
                     req.getPayload().getText().split(" "))));
         });
 
-        SlackHttpClient client = new SlackHttpClient();
-        Response response = client.postJsonBody("", ConversationsListRequest.builder().token("token").cursor("test")
-                .excludeArchived(true).build().toString());
+//        SlackHttpClient client = new SlackHttpClient();
+//        Response response = client.postJsonBody("", ConversationsListRequest.builder().token("token").cursor("test")
+//                .excludeArchived(true).build().toString());
+//
+//        System.out.println(response);
 
-        System.out.println(response);
 
         SlackAppServer server = new SlackAppServer(app);
         server.start(); // http://localhost:3000/slack/events

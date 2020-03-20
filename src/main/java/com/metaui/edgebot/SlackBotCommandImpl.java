@@ -13,10 +13,10 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
 
     private List<SlackCommandInterface> commands = new ArrayList<>();
 
-    public SlackBotCommandImpl() {
-        commands.add(new ExitCommandImpl());
-        commands.add(new GetPropertyCommandImpl());
-        commands.add(new ListPropertiesCommandImpl());
+    public SlackBotCommandImpl(SlackEngine engine) {
+        commands.add(new ExitCommandImpl(engine));
+        commands.add(new GetPropertyCommandImpl(engine));
+        commands.add(new ListPropertiesCommandImpl(engine));
     }
 
     @Override

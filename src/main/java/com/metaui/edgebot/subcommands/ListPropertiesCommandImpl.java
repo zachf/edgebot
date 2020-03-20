@@ -2,11 +2,15 @@ package com.metaui.edgebot.subcommands;
 
 import com.metaui.edgebot.BotCommandContext;
 import com.metaui.edgebot.SlackCommandInterface;
+import com.metaui.edgebot.SlackEngine;
 
 import java.util.Map;
 
 public class ListPropertiesCommandImpl implements SlackCommandInterface {
     public static final String PREFIX = "listprops";
+
+    public ListPropertiesCommandImpl(SlackEngine engine) {
+    }
 
     @Override
     public String execute(BotCommandContext context) {
