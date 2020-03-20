@@ -22,7 +22,7 @@ public class ListChannelsCommandImpl implements SlackCommandInterface {
         try {
             for (Conversation conversation : engine.getChannels()) {
                 if (conversation != null) {
-                    out.append(conversation.getId()).append(": ").append(conversation.getName());
+                    out.append(conversation.getId()).append(": ").append(conversation.getName()).append('\n');
                 }
             }
         } catch (Exception e) {
