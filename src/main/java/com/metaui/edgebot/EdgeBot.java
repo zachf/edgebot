@@ -8,9 +8,13 @@ import com.slack.api.SlackConfig;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.AppConfig;
 import com.slack.api.bolt.jetty.SlackAppServer;
+import com.slack.api.methods.request.chat.ChatPostMessageRequest;
+import com.slack.api.methods.request.conversations.ConversationsJoinRequest;
+import com.slack.api.methods.response.conversations.ConversationsJoinResponse;
 import com.slack.api.model.Conversation;
 import com.slack.api.util.http.SlackHttpClient;
 
+import java.util.Date;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -48,6 +52,15 @@ public class EdgeBot {
         for (Conversation conversation : engine.getChannels()) {
             if (conversation != null) {
                 System.out.println(conversation.getId() + ": " + conversation.getName());
+
+                if (conversation.getName().equals("edgebot-test")) {
+                    ConversationsJoinResponse response = slack.methods().conversationsJoin(
+                            ConversationsJoinRequest.builder().token(botToken).channel(conversation.getId()).build());
+                    System.out.println(response);
+
+                    slack.methods().chatPostMessage(ChatPostMessageRequest.builder().token(botToken).
+                            channel(conversation.getId()).text("Hello from the bot, it is " + new Date()).build());
+                }
             }
         }
 
