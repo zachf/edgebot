@@ -44,7 +44,7 @@ public class EdgeBot {
         SlackHttpClient client = new SlackHttpClient();
         client.setConfig(slackConfig);
         Slack slack = Slack.getInstance(client);
-        SlackEngine engine = new SlackEngine(slack, botToken, "edgebot-test");
+        SlackEngine engine = new SlackEngine(slack, botToken);
 
         for (Conversation conversation : engine.getChannels()) {
             if (conversation != null) {
