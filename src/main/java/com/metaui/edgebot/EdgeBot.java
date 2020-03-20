@@ -27,6 +27,7 @@ public class EdgeBot {
 
         String botToken = System.getProperty("SLACK_BOT_TOKEN");
         String signingSecret = System.getProperty("SLACK_SIGNING_SECRET");
+        String webhookUrl = System.getProperty("SLACK_WEBHOOK_URL");
 
         if (botToken == null || signingSecret == null) {
             System.err.println("Missing token or secret");
@@ -43,7 +44,7 @@ public class EdgeBot {
         App app = new App(config);
 
         SlackConfig slackConfig = new SlackConfig();
-        slackConfig.setProxyUrl("https://hooks.slack.com/services/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");
+        slackConfig.setProxyUrl(webhookUrl);
         SlackHttpClient client = new SlackHttpClient();
         client.setConfig(slackConfig);
         Slack slack = Slack.getInstance(client);
