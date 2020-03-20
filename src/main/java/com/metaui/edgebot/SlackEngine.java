@@ -26,10 +26,10 @@ public class SlackEngine implements Runnable {
     private String token;
     private List<String> allowedChannels;
 
-    SlackEngine(String token, String ... channelIds) {
+    SlackEngine(Slack slack, String token, String ... channelIds) {
+        this.slack = slack;
         this.token = token;
         this.allowedChannels = Arrays.asList(channelIds);
-        this.slack = Slack.getInstance();
     }
 
     public void run() {

@@ -3,10 +3,14 @@
  */
 package com.metaui.edgebot;
 
+import com.slack.api.Slack;
+import com.slack.api.SlackConfig;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.AppConfig;
 import com.slack.api.bolt.jetty.SlackAppServer;
 import com.slack.api.model.Conversation;
+import com.slack.api.util.http.SlackHttpClient;
+import okhttp3.OkHttpClient;
 
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
@@ -35,7 +39,12 @@ public class EdgeBot {
         config.setSigningSecret(signingSecret);
         App app = new App(config);
 
-        SlackEngine engine = new SlackEngine("", "edgebot-test");
+        SlackConfig slackConfig = new SlackConfig();
+        slackConfig.setProxyUrl("https://hooks.slack.com/services/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");
+        SlackHttpClient client = new SlackHttpClient();
+        client.setConfig(slackConfig);
+        Slack slack = Slack.getInstance(client);
+        SlackEngine engine = new SlackEngine(slack,"", "edgebot-test");
 //        engine.getChannels();
 //
 //        for (Conversation conversation : engine.getChannels()) {
