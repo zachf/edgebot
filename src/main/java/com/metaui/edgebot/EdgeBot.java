@@ -10,7 +10,6 @@ import com.slack.api.bolt.AppConfig;
 import com.slack.api.bolt.jetty.SlackAppServer;
 import com.slack.api.model.Conversation;
 import com.slack.api.util.http.SlackHttpClient;
-import okhttp3.OkHttpClient;
 
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;

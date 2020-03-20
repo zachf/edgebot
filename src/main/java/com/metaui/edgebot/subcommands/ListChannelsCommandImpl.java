@@ -5,8 +5,6 @@ import com.metaui.edgebot.SlackCommandInterface;
 import com.metaui.edgebot.SlackEngine;
 import com.slack.api.model.Conversation;
 
-import java.io.StringWriter;
-
 public class ListChannelsCommandImpl implements SlackCommandInterface {
     public static final String PREFIX = "listchannels";
     private SlackEngine engine;
