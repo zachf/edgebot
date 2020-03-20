@@ -26,13 +26,20 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
                     Arrays.copyOfRange(commandContext.getCommandTokens(), 1, commandContext.getCommandTokens().length));
 
             for (SlackCommandInterface command : commands) {
-                if (command.getPrefix().equals(commandContext.getCommandTokens()[0])) {
+                if (command.getPrefix().equalsIgnoreCase(commandContext.getCommandTokens()[0])) {
                     return command.execute(subCommandContext);
                 }
             }
+            if (commandContext.getCommandTokens()[0].equalsIgnoreCase("help")) {
+                StringBuilder out = new StringBuilder();
+                for (SlackCommandInterface cmd : commands) {
+                    out.append(cmd.getPrefix()).append("\n");
+                }
+                return "Available bot commands: \n" + out;
+            }
         }
 
-        return "Command not recognized, \"/bot help\" for help";
+        return "Command missing or not recognized, \"/bot help\" for help";
     }
 
     @Override
