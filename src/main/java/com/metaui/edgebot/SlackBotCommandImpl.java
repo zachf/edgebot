@@ -2,6 +2,7 @@ package com.metaui.edgebot;
 
 import com.metaui.edgebot.subcommands.ExitCommandImpl;
 import com.metaui.edgebot.subcommands.GetPropertyCommandImpl;
+import com.metaui.edgebot.subcommands.ListChannelsCommandImpl;
 import com.metaui.edgebot.subcommands.ListPropertiesCommandImpl;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class SlackBotCommandImpl implements SlackCommandInterface {
         commands.add(new ExitCommandImpl(engine));
         commands.add(new GetPropertyCommandImpl(engine));
         commands.add(new ListPropertiesCommandImpl(engine));
+        commands.add(new ListChannelsCommandImpl(engine));
     }
 
     @Override
