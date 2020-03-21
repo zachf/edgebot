@@ -84,13 +84,6 @@ public class EdgeBotMain {
                     req.getPayload().getText().split(" "))));
         });
 
-//        SlackHttpClient client = new SlackHttpClient();
-//        Response response = client.postJsonBody("", ConversationsListRequest.builder().token("token").cursor("test")
-//                .excludeArchived(true).build().toString());
-//
-//        System.out.println(response);
-
-
         SlackAppServer server = new SlackAppServer(app);
         server.start(); // http://localhost:3000/slack/events
     }
