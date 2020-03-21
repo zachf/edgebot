@@ -19,7 +19,7 @@ public class ListChannelsCommandImpl implements SlackBotCommand {
         try {
             for (Conversation conversation : botContext.getEngine().getChannels()) {
                 if (conversation != null) {
-                    out.append(conversation.getId()).append(": ").append(conversation.getName()).append('\n');
+                    out.append("- ").append(conversation.getId()).append(": ").append(conversation.getName()).append('\n');
                 }
             }
         } catch (Exception e) {
