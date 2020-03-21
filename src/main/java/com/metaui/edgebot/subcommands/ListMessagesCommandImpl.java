@@ -12,10 +12,10 @@ public class ListMessagesCommandImpl implements SlackBotCommand {
         StringBuilder out = new StringBuilder();
 
         try {
-            for (Conversation conversation : botContext.getEngine().getChannels()) {
+            for (Conversation conversation : botContext.getQueryHelper().getChannels()) {
                 if (conversation != null) {
                     if (conversation.getName().equals(botCommandContext.getCommandTokens()[0])) {
-                        for (Message message : botContext.getEngine().getMessages(conversation.getId())) {
+                        for (Message message : botContext.getQueryHelper().getMessages(conversation.getId())) {
                             if (message != null) {
                                 out.append(message.getUsername()).append(": ").append(message.getText()).append('\n');
                             }

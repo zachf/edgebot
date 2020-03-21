@@ -11,7 +11,7 @@ public class ListUsersCommandImpl implements SlackBotCommand {
         StringBuilder out = new StringBuilder();
 
         try {
-            for (User user : botContext.getEngine().getUsers()) {
+            for (User user : botContext.getQueryHelper().getUsers()) {
                 if (user != null) {
                     out.append(user.getId()).append(": ").append(user.getName()).append('\n');
                 }
