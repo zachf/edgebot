@@ -21,7 +21,8 @@ public class ExitCommandImpl implements SlackBotCommand {
         new Thread(() -> {
             try {
                 botContext.getSlack().methods().chatPostMessage(ChatPostMessageRequest.builder().token(botContext.getToken()).
-                        channel(botContext.getHomeChannel().getId()).text(botContext.getSlackBotName() + " is exiting, the time is " + new Date()).build());
+                        channel(botContext.getHomeChannel().getId()).text(botContext.getSlackBotName() +
+                        " is exiting, the time is _" + new Date() + "_").build());
 
                 Thread.sleep(1000);
                 System.exit(0);

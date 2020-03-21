@@ -69,7 +69,8 @@ public class EdgeBotMain {
                     System.out.println(response);
 
                     slack.methods().chatPostMessage(ChatPostMessageRequest.builder().token(botToken).
-                            channel(conversation.getId()).text(slackBotName + " is starting up, the time is " + new Date()).build());
+                            channel(conversation.getId()).text(slackBotName + " is starting up, the time is _" +
+                            new Date() + "_").build());
 
                     homeChannel = conversation;
                 }
