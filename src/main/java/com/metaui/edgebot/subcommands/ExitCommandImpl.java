@@ -10,14 +10,8 @@ import java.io.IOException;
 import java.util.Date;
 
 public class ExitCommandImpl implements SlackBotCommand {
-    private SlackBotContext botContext;
-
-    public ExitCommandImpl(SlackBotContext botContext) {
-        this.botContext = botContext;
-    }
-
     @Override
-    public String execute(BotCommandContext commandContext) {
+    public String execute(SlackBotContext botContext, BotCommandContext botCommandContext) {
         new Thread(() -> {
             try {
                 botContext.getSlack().methods().chatPostMessage(ChatPostMessageRequest.builder().token(botContext.getToken()).

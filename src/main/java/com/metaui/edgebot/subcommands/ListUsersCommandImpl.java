@@ -6,14 +6,8 @@ import com.metaui.edgebot.SlackBotContext;
 import com.slack.api.model.User;
 
 public class ListUsersCommandImpl implements SlackBotCommand {
-    private final SlackBotContext botContext;
-
-    public ListUsersCommandImpl(SlackBotContext botContext) {
-        this.botContext = botContext;
-    }
-
     @Override
-    public String execute(BotCommandContext context) {
+    public String execute(SlackBotContext botContext, BotCommandContext botCommandContext) {
         StringBuilder out = new StringBuilder();
 
         try {
