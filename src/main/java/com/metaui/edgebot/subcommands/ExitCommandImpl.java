@@ -29,6 +29,6 @@ public class ExitCommandImpl implements SlackBotCommand {
                 e.printStackTrace();
             }
         }).start();
-        return "Bot is exiting";
+        return "Initiating shutdown...";
     }
 }
