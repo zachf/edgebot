@@ -1,12 +1,11 @@
 package com.metaui.edgebot.subcommands;
 
 import com.metaui.edgebot.BotCommandContext;
+import com.metaui.edgebot.SlackBotCommand;
 import com.metaui.edgebot.SlackBotContext;
-import com.metaui.edgebot.SlackCommandInterface;
 import com.slack.api.model.User;
 
-public class ListUsersCommandImpl implements SlackCommandInterface {
-    public static final String PREFIX = "listusers";
+public class ListUsersCommandImpl implements SlackBotCommand {
     private final SlackBotContext botContext;
 
     public ListUsersCommandImpl(SlackBotContext botContext) {
@@ -29,10 +28,4 @@ public class ListUsersCommandImpl implements SlackCommandInterface {
         }
         return out.toString();
     }
-
-    @Override
-    public String getPrefix() {
-        return PREFIX;
-    }
-
 }

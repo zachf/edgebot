@@ -1,16 +1,15 @@
 package com.metaui.edgebot.subcommands;
 
 import com.metaui.edgebot.BotCommandContext;
+import com.metaui.edgebot.SlackBotCommand;
 import com.metaui.edgebot.SlackBotContext;
-import com.metaui.edgebot.SlackCommandInterface;
 import com.slack.api.methods.SlackApiException;
 import com.slack.api.methods.request.chat.ChatPostMessageRequest;
 
 import java.io.IOException;
 import java.util.Date;
 
-public class ExitCommandImpl implements SlackCommandInterface {
-    public static final String PREFIX = "exit";
+public class ExitCommandImpl implements SlackBotCommand {
     private SlackBotContext botContext;
 
     public ExitCommandImpl(SlackBotContext botContext) {
@@ -31,10 +30,5 @@ public class ExitCommandImpl implements SlackCommandInterface {
             }
         }).start();
         return "Bot is exiting";
-    }
-
-    @Override
-    public String getPrefix() {
-        return PREFIX;
     }
 }
