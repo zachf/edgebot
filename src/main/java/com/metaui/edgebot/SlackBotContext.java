@@ -4,11 +4,11 @@ import com.slack.api.Slack;
 import com.slack.api.model.Conversation;
 
 public class SlackBotContext {
-    private String slackBotName;
-    private Slack slack;
-    private SlackEngine engine;
-    private String token;
-    private Conversation homeChannel;
+    private final String slackBotName;
+    private final Slack slack;
+    private final SlackEngine engine;
+    private final String token;
+    private final Conversation homeChannel;
 
     public SlackBotContext(String slackBotName, Slack slack, SlackEngine engine, String token, Conversation homeChannel) {
         this.slackBotName = slackBotName;
