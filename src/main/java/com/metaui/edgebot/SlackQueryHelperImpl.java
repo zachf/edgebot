@@ -18,27 +18,19 @@ import com.slack.api.model.User;
 import java.io.IOException;
 import java.util.*;
 
-public class SlackEngine implements Runnable {
+public class SlackQueryHelperImpl implements SlackQueryHelper {
 
     private final Slack slack;
     private String token;
     private List<String> allowedChannels;
 
-    SlackEngine(Slack slack, String token, String... channelIds) {
+    SlackQueryHelperImpl(Slack slack, String token, String... channelIds) {
         this.slack = slack;
         this.token = token;
         this.allowedChannels = Arrays.asList(channelIds);
     }
 
-    public void run() {
-        try {
-            getUsers();
-            getChannels(); // calls getMessages as it loops
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
-        }
-    }
-
+    @Override
     public List<Conversation> getChannels() throws IOException, SlackApiException {
         boolean keepGoing = true;
         String nextCursor = null;
@@ -69,6 +61,7 @@ public class SlackEngine implements Runnable {
         return allChannels;
     }
 
+    @Override
     public List<User> getUsers() throws IOException, SlackApiException {
         boolean keepGoing = true;
         String nextCursor = null;
@@ -95,6 +88,7 @@ public class SlackEngine implements Runnable {
         return allUsers;
     }
 
+    @Override
     public List<Message> getMessages(String channel) throws IOException, SlackApiException {
         boolean keepGoing = true;
         String nextCursor = null;

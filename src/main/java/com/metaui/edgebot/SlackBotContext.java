@@ -6,14 +6,14 @@ import com.slack.api.model.Conversation;
 public class SlackBotContext {
     private final String slackBotName;
     private final Slack slack;
-    private final SlackEngine engine;
+    private final SlackQueryHelper queryHelper;
     private final String token;
     private final Conversation homeChannel;
 
-    public SlackBotContext(String slackBotName, Slack slack, SlackEngine engine, String token, Conversation homeChannel) {
+    public SlackBotContext(String slackBotName, Slack slack, SlackQueryHelper queryHelper, String token, Conversation homeChannel) {
         this.slackBotName = slackBotName;
         this.slack = slack;
-        this.engine = engine;
+        this.queryHelper = queryHelper;
         this.token = token;
         this.homeChannel = homeChannel;
     }
@@ -26,8 +26,8 @@ public class SlackBotContext {
         return slack;
     }
 
-    public SlackEngine getEngine() {
-        return engine;
+    public SlackQueryHelper getQueryHelper() {
+        return queryHelper;
     }
 
     public String getToken() {

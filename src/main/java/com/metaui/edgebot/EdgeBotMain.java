@@ -55,11 +55,11 @@ public class EdgeBotMain {
         SlackHttpClient client = new SlackHttpClient();
         client.setConfig(slackConfig);
         Slack slack = Slack.getInstance(client);
-        SlackEngine engine = new SlackEngine(slack, botToken);
+        SlackQueryHelper queryHelper = new SlackQueryHelperImpl(slack, botToken);
 
         Conversation homeChannel = null;
 
-        for (Conversation conversation : engine.getChannels()) {
+        for (Conversation conversation : queryHelper.getChannels()) {
             if (conversation != null) {
                 System.out.println(conversation.getId() + ": " + conversation.getName());
 
@@ -81,7 +81,7 @@ public class EdgeBotMain {
         final SlackBotCommand cmd = new SlackBotRootCommandImpl();
         app.command("/bot", (req, ctx) -> {
             System.out.println(req);
-            return ctx.ack(cmd.execute(new SlackBotContext(slackBotName, slack, engine, botToken, channel),
+            return ctx.ack(cmd.execute(new SlackBotContext(slackBotName, slack, queryHelper, botToken, channel),
                     new BotCommandContext(req.getPayload().getUserName(),
                             req.getPayload().getText().split(" "))));
         });
