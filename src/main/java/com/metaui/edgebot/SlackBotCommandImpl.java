@@ -13,8 +13,8 @@ class SlackBotCommandImpl implements SlackBotCommand {
 
     private Map<String, SlackBotCommand> commands = new HashMap<>();
 
-    public SlackBotCommandImpl(Slack slack, SlackEngine engine, String token, Conversation homeChannel) {
-        SlackBotContext context = new SlackBotContext(slack, engine, token, homeChannel);
+    public SlackBotCommandImpl(String slackBotName, Slack slack, SlackEngine engine, String token, Conversation homeChannel) {
+        SlackBotContext context = new SlackBotContext(slackBotName, slack, engine, token, homeChannel);
 
         commands.put("exit", new ExitCommandImpl(context));
         commands.put("getprop", new GetPropertyCommandImpl(context));

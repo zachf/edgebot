@@ -4,11 +4,10 @@
 package com.metaui.edgebot;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class EdgeBotTest {
     @Test public void testAppHasAGreeting() {
-        EdgeBot classUnderTest = new EdgeBot();
+        EdgeBotMain classUnderTest = new EdgeBotMain();
         //assertNotNull("app should have a greeting", classUnderTest.getGreeting());
     }
 }
