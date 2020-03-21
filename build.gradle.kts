@@ -20,11 +20,13 @@ repositories {
     jcenter()
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 dependencies {
     // This dependency is used by the application.
-    implementation("com.google.guava:guava:27.1-jre")
-    implementation("com.google.auto.value:auto-value-annotations:1.7")
-
     implementation("com.slack.api:bolt:1.0.1")
     implementation("com.slack.api:bolt-servlet:1.0.1")
     implementation("com.slack.api:bolt-jetty:1.0.1")
