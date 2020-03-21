@@ -3,11 +3,11 @@ package com.metaui.edgebot;
 import com.metaui.edgebot.subcommands.*;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 class SlackBotRootCommandImpl implements SlackBotCommand {
-    private Map<String, SlackBotCommand> commands = new HashMap<>();
+    private Map<String, SlackBotCommand> commands = new TreeMap<>();
 
     public SlackBotRootCommandImpl() {
         commands.put("exit", new ExitCommandImpl());
