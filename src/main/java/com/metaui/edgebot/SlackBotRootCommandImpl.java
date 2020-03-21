@@ -1,24 +1,21 @@
 package com.metaui.edgebot;
 
 import com.metaui.edgebot.subcommands.*;
-import com.slack.api.Slack;
-import com.slack.api.model.Conversation;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-class SlackBotCommandImpl implements SlackBotCommand {
+class SlackBotRootCommandImpl implements SlackBotCommand {
     private Map<String, SlackBotCommand> commands = new HashMap<>();
 
-    public SlackBotCommandImpl(String slackBotName, Slack slack, SlackEngine engine, String token, Conversation homeChannel) {
-        SlackBotContext context = new SlackBotContext(slackBotName, slack, engine, token, homeChannel);
-
+    public SlackBotRootCommandImpl() {
         commands.put("exit", new ExitCommandImpl());
         commands.put("getprop", new GetPropertyCommandImpl());
         commands.put("listprops", new ListPropertiesCommandImpl());
         commands.put("listchannels", new ListChannelsCommandImpl());
         commands.put("listusers", new ListUsersCommandImpl());
+        commands.put("listmessages", new ListMessagesCommandImpl());
     }
 
     @Override

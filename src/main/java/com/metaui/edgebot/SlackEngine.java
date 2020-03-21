@@ -16,9 +16,7 @@ import com.slack.api.model.Message;
 import com.slack.api.model.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class SlackEngine implements Runnable {
 
@@ -26,7 +24,7 @@ public class SlackEngine implements Runnable {
     private String token;
     private List<String> allowedChannels;
 
-    SlackEngine(Slack slack, String token, String ... channelIds) {
+    SlackEngine(Slack slack, String token, String... channelIds) {
         this.slack = slack;
         this.token = token;
         this.allowedChannels = Arrays.asList(channelIds);
@@ -53,7 +51,7 @@ public class SlackEngine implements Runnable {
                 allChannels.add(ciResp.getChannel());
             }
         } else {
-            ConversationsListRequest clReq = ConversationsListRequest.builder().token(token).types(Arrays.asList(ConversationType.PUBLIC_CHANNEL)).build();
+            ConversationsListRequest clReq = ConversationsListRequest.builder().token(token).types(Collections.singletonList(ConversationType.PUBLIC_CHANNEL)).build();
             while (keepGoing) {
                 clReq.setCursor(nextCursor);
                 ConversationsListResponse clResp = slack.methods().conversationsList(clReq);
@@ -66,7 +64,7 @@ public class SlackEngine implements Runnable {
         }
         System.out.println("Got " + allChannels.size() + " channels");
         // sort by name
-        allChannels.sort((Conversation c1, Conversation c2) -> c1.getName().compareTo(c2.getName()));
+        allChannels.sort(Comparator.comparing(Conversation::getName));
 
         return allChannels;
     }
@@ -92,7 +90,7 @@ public class SlackEngine implements Runnable {
         }
         System.out.println("Got " + allUsers.size() + " users");
         // alphabetical sort
-        allUsers.sort((User u1, User u2) -> u1.getName().compareTo(u2.getName()));
+        allUsers.sort(Comparator.comparing(User::getName));
 
         return allUsers;
     }
@@ -108,7 +106,7 @@ public class SlackEngine implements Runnable {
             chReq.setCursor(nextCursor);
             ConversationsHistoryResponse chResp = slack.methods().conversationsHistory(chReq);
 
-            System.out.println("Adding "+ (++loopCount) + "-" + chResp.getMessages().size() + " messages");
+            System.out.println("Adding " + (++loopCount) + "-" + chResp.getMessages().size() + " messages");
             allMessages.addAll(chResp.getMessages());
 
             nextCursor = chResp.getResponseMetadata() == null ? null : chResp.getResponseMetadata().getNextCursor();
@@ -120,17 +118,8 @@ public class SlackEngine implements Runnable {
 
         System.out.println("Got " + allMessages.size() + " messages for " + channel);
         // sort by timestamp
-        allMessages.sort((Message m1, Message m2) -> m1.getTs().compareTo(m2.getTs()));
+        allMessages.sort(Comparator.comparing(Message::getTs));
 
         return allMessages;
     }
-
-    private void pauseFor(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException ie) {
-            // ignore this
-        }
-    }
-
 }

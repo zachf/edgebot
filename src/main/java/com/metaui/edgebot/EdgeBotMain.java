@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class EdgeBotMain {
     public static void main(String[] args) throws Exception {
         // App expects env variables (SLACK_BOT_TOKEN, SLACK_SIGNING_SECRET)
-        System.setProperty("org.eclipse.jetty.LEVEL","DEBUG");
+        System.setProperty("org.eclipse.jetty.LEVEL", "DEBUG");
 
         String botToken = System.getProperty("SLACK_BOT_TOKEN");
         String signingSecret = System.getProperty("SLACK_SIGNING_SECRET");
@@ -77,11 +77,13 @@ public class EdgeBotMain {
             }
         }
 
-        final SlackBotCommand botCommand = SlackBotCommand.newInstance(slackBotName, slack, engine, botToken, homeChannel);
+        final Conversation channel = homeChannel;
+        final SlackBotCommand cmd = new SlackBotRootCommandImpl();
         app.command("/bot", (req, ctx) -> {
             System.out.println(req);
-            return ctx.ack(botCommand.execute(, new BotCommandContext(req.getPayload().getUserName(),
-                    req.getPayload().getText().split(" "))));
+            return ctx.ack(cmd.execute(new SlackBotContext(slackBotName, slack, engine, botToken, channel),
+                    new BotCommandContext(req.getPayload().getUserName(),
+                            req.getPayload().getText().split(" "))));
         });
 
         SlackAppServer server = new SlackAppServer(app);
